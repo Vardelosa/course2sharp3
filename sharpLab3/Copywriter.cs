@@ -124,7 +124,12 @@ namespace sharpLab3
                 using(FileStream fs = File.Open(filename + ".dat", FileMode.Open))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
-                    SerializableObject = (Copywriter)formatter.Deserialize(fs);
+                    Copywriter c1 = (Copywriter)formatter.Deserialize(fs);
+                    SerializableObject.AuthorInfo = c1.AuthorInfo;
+                    SerializableObject.Nickname = c1.Nickname;
+                    SerializableObject.Level = c1.Level;
+                    SerializableObject.Rating = c1.Rating;
+                    SerializableObject.ListOfArticles = c1.ListOfArticles;                  
                     return true;
                 }
             }
@@ -135,7 +140,7 @@ namespace sharpLab3
         }
         public bool AddFromConsole()
         {
-            Console.WriteLine("Введите данные в виде: *название_статьи/кол-во символов/дата*\n" +
+            Console.WriteLine("\nВведите данные в виде: *название_статьи/кол-во символов/дата*\n" +
                 "ВНИМАНИЕ: Дата должна быть введена в виде дд.мм.гггг");
             string info = Console.ReadLine();
             try
